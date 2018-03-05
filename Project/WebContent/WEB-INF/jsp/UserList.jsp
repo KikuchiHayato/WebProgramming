@@ -32,7 +32,7 @@
   <body>
     <div class = "container">
     <div class = "wrapper">
-		<form method="post" action="UserSearchServlet" class="form-signin">
+		<form method="post" action="UserListServlet" class="form-signin">
 		   <h3 class="form-signin-heading">User List</h3>
 
 		   <hr class="colorgraph"><br>

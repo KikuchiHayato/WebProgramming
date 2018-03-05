@@ -47,7 +47,7 @@ public class UserUpdateServlet extends HttpServlet {
 
 		if (!password.equals(password_confirm)) {
 
-			request.setAttribute("errMsg", "Our apologies, an item hasn't been filled in correctly. Please enter it again.");
+			request.setAttribute("errMsg", "Our apologies, Password and Password to Confirm do not match. Please enter it again.");
 
 			UserDao userDao = new UserDao();
 			User user = userDao.findByUserInfo(id);

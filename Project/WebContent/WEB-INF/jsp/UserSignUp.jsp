@@ -42,11 +42,11 @@
 	    <h3 class="form-signin-heading">Please Sign Up</h3>
 		<hr class="colorgraph"><br>
 
-	    <input type="text" class="form-control" name="loginId" id="inputLoginId" placeholder="UserID" required autofocus/>
+	    <input type="text" class="form-control" name="loginId" id="inputLoginId" placeholder="UserID"  value ="${userSignUp.loginId}"required autofocus/>
 	    <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password" required/>
 	    <input type="password" class="form-control" name="password-confirm" id="inputpassword-confirm" placeholder="Password to Confirm" required/>
-	    <input type="text" class="form-control" name="name" id="iuputname" placeholder="Name" required/>
-	    <input type="date" class="form-control" name="birthDate" id="inputbirthDate" required/>
+	    <input type="text" class="form-control" name="name" id="iuputname" placeholder="Name" value ="${userSignUp.name}" required/>
+	    <input type="date" class="form-control" name="birthDate" id="inputbirthDate" value ="${userSignUp.birthdate}" required/>
 
 	    <div align="center">
           <button type="submit" class="btn btn-primary form-submit">Sign Up</button>

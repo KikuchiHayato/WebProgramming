@@ -38,7 +38,7 @@
 	<div class="wrapper">
 	  <form method="post" action="UserUpdateServlet" class="form-signin2">
 	    <h3 class="form-signin-heading">Please Update</h3>
-	    <input type="hidden" name = id value = ${userdetail.loginId}>
+	    <input type="hidden" name = id value = ${userdetail.id}>
 		<hr class="colorgraph"><br>
 
 		UserID　:　<a>${userdetail.loginId}</a>

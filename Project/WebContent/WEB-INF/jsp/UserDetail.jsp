@@ -35,27 +35,27 @@
 
 		<div class="form-group">
           <label for="user-id" class="control-label col-sm-2">UserID</label>
-          <a>${userdetail.loginId}  ${usersearch.loginId}</a>
+          <a>${userdetail.loginId}</a>
         </div>
 
         <div class="form-group">
           <label for="user-name" class="control-label col-sm-2">Name</label>
-          <a>${userdetail.name}  ${usersearch.name}</a>
+          <a>${userdetail.name}</a>
         </div>
 
         <div class="form-group">
           <label for="continent" class="control-label col-sm-2">Date of Birth</label>
-          <a>${userdetail.birthDate}  ${usersearch.birthDate}</a>
+          <a>${userdetail.birthDate}</a>
         </div>
 
         <div class="form-group">
           <label for="continent" class="control-label col-sm-2">Registered Date</label>
-          <a>${userdetail.createDate}  ${usersearch.createDate}</a>
+          <a>${userdetail.createDate}</a>
         </div>
 
         <div class="form-group">
           <label for="continent" class="control-label col-sm-2">Date Modified</label>
-          <a>${userdetail.updateDate}  ${usersearch.updateDate}</a>
+          <a>${userdetail.updateDate}</a>
         </div>
 
 	    <br>

@@ -7,12 +7,19 @@ public class User {
 	private String loginId;
 	private String name;
 	private Date birthDate;
+	private String birthdate;
 	private String password;
 	private String createDate;
 	private String updateDate;
 
 	public User(int idDate, String loginId, String name) {
 		this.id = idDate;
+		this.loginId = loginId;
+		this.name = name;
+	}
+
+	public User(String loginId, String name, String birthDate) {
+		this.birthdate = birthDate;
 		this.loginId = loginId;
 		this.name = name;
 	}
@@ -78,5 +85,11 @@ public class User {
 	}
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
+	}
+	public String getBirthdate() {
+		return birthdate;
+	}
+	public void setBirthdate(String birthdate) {
+		this.birthdate = birthdate;
 	}
 }

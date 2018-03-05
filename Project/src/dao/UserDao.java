@@ -118,6 +118,39 @@ public class UserDao {
         }
 	}
 
+	public String findBySignUpinfo(String loginId) {
+		Connection conn = null;
+        try {
+        	conn = DBManager.getConnection();
+
+            String sql = "SELECT * FROM user WHERE login_id = ?";
+
+            PreparedStatement pStmt = conn.prepareStatement(sql);
+            pStmt.setString(1, loginId);
+            ResultSet rs = pStmt.executeQuery();
+
+            if (!rs.next()) {
+                return null;
+            }
+
+            String loginIdData = rs.getString("login_id");
+            return new String(loginIdData);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+        }
+	}
+
 	public boolean findByUserUpdateInfo(String id, String password, String name, String birthDate) {
 		Connection conn = null;
         try {
@@ -129,6 +162,7 @@ public class UserDao {
 
             if (password.equals("")) {
             	sql = "UPDATE user SET name = ?, birth_date = ?, update_date = now() WHERE id = ?";
+            	pStmt = conn.prepareStatement(sql);
 
             	pStmt.setString(1, name);
                 pStmt.setString(2, birthDate);
@@ -187,32 +221,42 @@ public class UserDao {
         }
 	}
 
-    public User findSearch(String loginId, String name,String birthdate) {
-        Connection conn = null;
+    public List<User> findSearch(String loginId, String name,String birthdate) {
+    	Connection conn = null;
+        List<User> userList = new ArrayList<User>();
 
         try {
             conn = DBManager.getConnection();
 
-            String sql = "SELECT * FROM user";
+            String sql = "SELECT * FROM user WHERE id != '1'";
 
             if (!loginId.equals("")) {
             	sql += " and login_id = '" + loginId + "'";
-            } else if (!name.equals("")) {
-            	sql += " and name = '%" + name + "%'";
-            } else if (!birthdate.equals("")) {
+            }
+
+            if (!name.equals("")) {
+            	sql += " and name LIKE '%" + name + "%'";
+            }
+
+            if (!birthdate.equals("")) {
             	sql += " and birth_date = '" + birthdate + "'";
             }
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
-            int idDate = rs.getInt("id");
-            String loginIdData = rs.getString("login_id");
-            String nameData = rs.getString("name");
-            Date birthDate = rs.getDate("birth_date");
-            String RegisteredDate = rs.getString("create_date");
-            String ModifiedData = rs.getString("update_date");
-            return new User(idDate,loginIdData, nameData,birthDate,RegisteredDate,ModifiedData);
+            while (rs.next()) {
+            	int id = rs.getInt("id");
+                loginId = rs.getString("login_id");
+                name = rs.getString("name");
+                Date birthDate = rs.getDate("birth_date");
+                String password = rs.getString("password");
+                String createDate = rs.getString("create_date");
+                String updateDate = rs.getString("update_date");
+                User user = new User(id, loginId, name, birthDate, password, createDate, updateDate);
+
+                userList.add(user);
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -227,6 +271,7 @@ public class UserDao {
                 }
             }
         }
+		return userList;
     }
 
     public List<User> findAll() {

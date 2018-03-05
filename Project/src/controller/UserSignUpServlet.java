@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.UserDao;
+import model.User;
 
 @WebServlet("/UserSignUpServlet")
 public class UserSignUpServlet extends HttpServlet {
@@ -36,9 +37,13 @@ public class UserSignUpServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String birthDate = request.getParameter("birthDate");
 
+		User user = new User(loginId,name,birthDate);
+
 		if (!password.equals(password_confirm)) {
 
-			request.setAttribute("errMsg", "Our apologies, an item hasn't been filled in correctly. Please enter it again.");
+			request.setAttribute("errMsg", "Our apologies, Password and Password to Confirm do not match. Please enter it again.");
+
+			request.setAttribute("userSignUp", user);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserSignUp.jsp");
 			dispatcher.forward(request, response);
@@ -46,6 +51,19 @@ public class UserSignUpServlet extends HttpServlet {
 		}
 
 		UserDao userDao = new UserDao();
+		String loginid = userDao.findBySignUpinfo(loginId);
+
+		if (loginId.equals(loginid)) {
+
+			request.setAttribute("errMsg", "Our apologies, UserID is already in use. Please enter it again.");
+
+			request.setAttribute("userSignUp", user);
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserSignUp.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+
 		userDao.findBySignUpInfo(loginId, password, name, birthDate);
 
 		response.sendRedirect("UserListServlet");

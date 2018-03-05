@@ -34,7 +34,7 @@
 	<div class="wrapper">
 	  <form action="UserDeleteServlet" method="post" class="form-signin2">
 	    <h3 class="form-signin-heading">Please Delete</h3>
-		<input type="hidden" name = id value = ${userdetail.loginId}>
+		<input type="hidden" name = id value = ${userdetail.id}>
 		<hr class="colorgraph"><br>
 
         UserID　:　${userdetail.name}<br>

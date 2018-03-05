@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
 
 		if (user == null) {
 
-			request.setAttribute("errMsg", "Sorry,your UserID or password cannot be recognized.");
+			request.setAttribute("errMsg", "Our apologies, your UserID or password cannot be recognized. Please enter it again.");
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserSignIn.jsp");
 			dispatcher.forward(request, response);
